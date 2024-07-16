@@ -1,4 +1,4 @@
-import { Box, TextareaAutosize } from "@mui/material";
+import { Box, TextareaAutosize, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MystPreview from "./MystPreview";
 
@@ -7,25 +7,41 @@ const Home = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        gap: "10px",
         padding: "50px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
-      <TextareaAutosize
-        minRows={20}
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
+      <Typography variant="h4" style={{ textAlign: "center" }}>
+        Myst Preview
+      </Typography>
       <Box
         sx={{
-          minWidth: "300px",
-          minHeight: "300px",
-          border: "1px solid black",
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+          padding: "50px",
         }}
       >
-        <MystPreview content={content} />
+        <TextareaAutosize
+          minRows={10}
+          style={{ width: "500px" }}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Enter your content here..."
+        />
+        <Box
+          sx={{
+            width: "500px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "20px",
+            backgroundColor: "#f5f5f5",
+          }}
+        >
+          <MystPreview content={content} />
+        </Box>
       </Box>
     </Box>
   );

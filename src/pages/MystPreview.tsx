@@ -13,19 +13,29 @@ import {
 
 export const MY_RENDERERS: Record<string, NodeRenderer> = {
   ...DEFAULT_RENDERERS,
+  mystDirective({ node }) {
+    return (
+      <pre title={node.message}>
+        <span className="text-red-500">
+          {node.message}
+          {"\n\n"}
+        </span>
+        {node.value}
+      </pre>
+    );
+  },
   text({ node }) {
     // Change zero-width space into `<wbr>` which is better for copying
     // These are used in links, and potentially other long words
-    if (!node.value?.includes('​')) {
+    if (!node.value?.includes("​")) {
       return <>{node.value}</>;
     }
-    const text = node.value.split('​');
+    const text = node.value.split("​");
     return (
       <>
-        {text.map((v, i) => (
+        {text.map((v: any, i: any) => (
           <React.Fragment key={i}>
-            {v}
-            {i < text.length - 1 && <wbr />}
+            {v}z{i < text.length - 1 && <wbr />}
           </React.Fragment>
         ))}
       </>
